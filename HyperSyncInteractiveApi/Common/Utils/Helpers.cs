@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
+using System.Web;
 
 namespace HyperSyncInteractiveApi.Common.Utils
 {
@@ -16,5 +17,7 @@ namespace HyperSyncInteractiveApi.Common.Utils
             .ToLowerInvariant();
       }
     }
+
+    internal static string GetQueryValueByName(string query, string key) => HttpUtility.ParseQueryString(query).Get(key);
   }
 }

@@ -72,6 +72,7 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -83,12 +84,22 @@
     <Compile Include="Authentication\Exceptions\AuthenticationException.cs" />
     <Compile Include="Authentication\HsAuthentication.cs" />
     <Compile Include="Authentication\Models\Authorization\AuthorizationData.cs" />
-    <Compile Include="Authentication\Models\Authorization\AuthorizationRequest.cs" />
+    <Compile Include="Authentication\Models\Authorization\LoginVerifierAuthorizationRequest.cs" />
+    <Compile Include="Authentication\Models\Authorization\ConsentVerifierAuthorizationRequest.cs" />
+    <Compile Include="Authentication\Models\Authorization\AuthorizationRequestBase.cs" />
     <Compile Include="Authentication\Models\Authorization\AuthorizationResponse.cs" />
     <Compile Include="Authentication\Abstarctions\IHsAuthentication.cs" />
+    <Compile Include="Authentication\Models\Consent\ConsentData.cs" />
+    <Compile Include="Authentication\Models\Consent\ConsentRequest.cs" />
+    <Compile Include="Authentication\Models\Consent\ConsentResponse.cs" />
     <Compile Include="Authentication\Models\Login\LoginData.cs" />
     <Compile Include="Authentication\Models\Login\LoginRequest.cs" />
     <Compile Include="Authentication\Models\Login\LoginResponse.cs" />
+    <Compile Include="Authentication\Models\MpinLogin\MpinLoginData.cs" />
+    <Compile Include="Authentication\Models\MpinLogin\MpinLoginRequest.cs" />
+    <Compile Include="Authentication\Models\MpinLogin\MpinLoginResponse.cs" />
+    <Compile Include="Authentication\Models\Token\TokenData.cs" />
+    <Compile Include="Authentication\Models\Token\TokenResponse.cs" />
     <Compile Include="Common\BaseData.cs" />
     <Compile Include="Common\BaseResponse.cs" />
     <Compile Include="Common\Utils\FlurlJsonSerializer.cs" />
@@ -101,6 +112,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\System.Text.Json.6.0.5\build\System.Text.Json.targets" Condition="Exists('packages\System.Text.Json.6.0.5\build\System.Text.Json.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

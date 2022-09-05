@@ -1,0 +1,9 @@
+﻿using HyperSyncInteractiveApi.Common;
+
+namespace HyperSyncInteractiveApi.Authentication.Models.Token
+{
+  public class TokenResponse : BaseResponse
+  {
+    public TokenData Data { get; set; }
+  }
+}

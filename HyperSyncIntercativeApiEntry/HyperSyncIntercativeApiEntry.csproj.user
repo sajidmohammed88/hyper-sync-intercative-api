@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <StartArguments>client_id:R7JW9DDMK0O uid:VIJAY-99991 pwd:abc%40123</StartArguments>
+    <StartArguments>client_id:R7JW9DDMK0O uid:VIJAY-99991 pwd:abc%40123 mpin:1234 client_secret:52a9aaa31be364108891e4ac79c1b52f</StartArguments>
   </PropertyGroup>
 </Project>

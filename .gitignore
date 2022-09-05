@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/HyperSyncInteractiveApi/packages
+/HyperSyncInteractiveApi/obj/Debug
+/HyperSyncInteractiveApi/.vs/HyperSyncInteractiveApi
+/HyperSyncIntercativeApiEntry/obj/Debug
+/HyperSyncIntercativeApiEntry/bin/Debug
+/packages
+/HyperSyncInteractiveApi/bin/Debug

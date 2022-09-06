@@ -9,5 +9,7 @@
     public const string UrlEncodedContentTypeHeaderValue = "application/x-www-form-urlencoded";
     
     public const string AcceptHeaderKey = "Accept";
+
+    public const string TokenHeaderKey = "x-access-token";
   }
 }

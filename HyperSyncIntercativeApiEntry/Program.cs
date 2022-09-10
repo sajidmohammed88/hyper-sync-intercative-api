@@ -1,8 +1,11 @@
 ﻿using HyperSyncInteractiveApi.Authentication;
 using HyperSyncInteractiveApi.Trading;
 using HyperSyncInteractiveApi.Trading.Models.Book;
+using HyperSyncInteractiveApi.Trading.Models.ChartData;
 using HyperSyncInteractiveApi.Trading.Models.Holdings;
 using HyperSyncInteractiveApi.Trading.Models.Limits;
+using HyperSyncInteractiveApi.Trading.Models.Market;
+using HyperSyncInteractiveApi.Trading.Models.Message;
 using HyperSyncInteractiveApi.Trading.Models.Order;
 using HyperSyncInteractiveApi.Trading.Models.PositionConversion;
 using HyperSyncInteractiveApi.Trading.Models.ScriptDetails;
@@ -95,6 +98,24 @@ namespace HyperSyncIntercativeApiEntry
 
       // Limits
       RmsLimitsResponse rmsLimitsResponse = await hsInteractiveApi.FillRmsLimitsAsync(new RmsLimitsRequest
+      {
+
+      });
+
+      // market
+      MarketStatusResponse marketStatusResponse = await hsInteractiveApi.FillMarketStatusAsync(new MarketStatusRequest
+      {
+
+      });
+
+      // messages
+      ExchangeMessageResponse exchangeMessageResponse = await hsInteractiveApi.FillExchangeMessageAsync(new ExchangeMessageRequest
+      {
+
+      });
+      // chart data
+
+      ChartDataResponse chartDataResponse = await hsInteractiveApi.FillChartDataAsync(new ChartDataRequest
       {
 
       });

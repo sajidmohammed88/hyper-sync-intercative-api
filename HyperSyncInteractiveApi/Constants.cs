@@ -75,6 +75,21 @@
       {
         internal const string LimitsPath = "quick/user/limits";
       }
+
+      internal static class Market
+      {
+        internal const string MarketStatusPath = "quick/MarketStatus";
+      }
+
+      internal static class Messages
+      {
+        internal const string ExchangeMessagePath = "quick/ExchangeMessage";
+      }
+
+      internal static class ChartData
+      {
+        internal const string IntradayChartPath = "quick/scrip/chart";
+      }
     }
   }
 }

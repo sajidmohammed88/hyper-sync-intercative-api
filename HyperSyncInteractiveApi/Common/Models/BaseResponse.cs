@@ -5,7 +5,7 @@ namespace HyperSyncInteractiveApi.Common.Models
   /// <summary>
   /// The base response of the API.
   /// </summary>
-  public class BaseResponse
+  public class BaseResponse : BaseData
   {
     /// <summary>
     /// The status code reponse.
@@ -16,7 +16,5 @@ namespace HyperSyncInteractiveApi.Common.Models
     /// The reponse status.
     /// </summary>
     public string Status { get; set; }
-
-    public string Message { get; set; }
   }
 }

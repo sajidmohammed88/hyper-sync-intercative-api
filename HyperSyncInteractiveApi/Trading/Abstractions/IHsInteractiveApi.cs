@@ -1,6 +1,9 @@
 ﻿using HyperSyncInteractiveApi.Trading.Models.Book;
+using HyperSyncInteractiveApi.Trading.Models.ChartData;
 using HyperSyncInteractiveApi.Trading.Models.Holdings;
 using HyperSyncInteractiveApi.Trading.Models.Limits;
+using HyperSyncInteractiveApi.Trading.Models.Market;
+using HyperSyncInteractiveApi.Trading.Models.Message;
 using HyperSyncInteractiveApi.Trading.Models.Order;
 using HyperSyncInteractiveApi.Trading.Models.PositionConversion;
 using HyperSyncInteractiveApi.Trading.Models.ScriptDetails;
@@ -70,6 +73,15 @@ namespace HyperSyncInteractiveApi.Trading.Abstractions
     #region Limits
 
     Task<RmsLimitsResponse> FillRmsLimitsAsync(RmsLimitsRequest rmsLimitsRequest);
+    #endregion
+    #region Market
+    Task<MarketStatusResponse> FillMarketStatusAsync(MarketStatusRequest marketStatusRequest);
+    #endregion
+    #region Messages
+    Task<ExchangeMessageResponse> FillExchangeMessageAsync(ExchangeMessageRequest exchangeMessageRequest);
+    #endregion
+    #region Chart data
+    Task<ChartDataResponse> FillChartDataAsync(ChartDataRequest chartDataRequest);
     #endregion
   }
 }

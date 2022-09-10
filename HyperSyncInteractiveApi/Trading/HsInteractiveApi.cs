@@ -1,7 +1,10 @@
 ﻿using HyperSyncInteractiveApi.Trading.Abstractions;
 using HyperSyncInteractiveApi.Trading.Models.Book;
+using HyperSyncInteractiveApi.Trading.Models.ChartData;
 using HyperSyncInteractiveApi.Trading.Models.Holdings;
 using HyperSyncInteractiveApi.Trading.Models.Limits;
+using HyperSyncInteractiveApi.Trading.Models.Market;
+using HyperSyncInteractiveApi.Trading.Models.Message;
 using HyperSyncInteractiveApi.Trading.Models.Order;
 using HyperSyncInteractiveApi.Trading.Models.PositionConversion;
 using HyperSyncInteractiveApi.Trading.Models.ScriptDetails;
@@ -139,6 +142,24 @@ namespace HyperSyncInteractiveApi.Trading
       return PostAsync<RmsLimitsRequest, RmsLimitsResponse>(Constants.Trading.Limits.LimitsPath, rmsLimitsRequest);
     }
 
+    #endregion
+    #region Market
+    public Task<MarketStatusResponse> FillMarketStatusAsync(MarketStatusRequest marketStatusRequest)
+    {
+      return PostAsync<MarketStatusRequest, MarketStatusResponse>(Constants.Trading.Market.MarketStatusPath, marketStatusRequest);
+    }
+    #endregion
+    #region Messages
+    public Task<ExchangeMessageResponse> FillExchangeMessageAsync(ExchangeMessageRequest exchangeMessageRequest)
+    {
+      return PostAsync<ExchangeMessageRequest, ExchangeMessageResponse>(Constants.Trading.Messages.ExchangeMessagePath, exchangeMessageRequest);
+    }
+    #endregion
+    #region Chart data
+    public Task<ChartDataResponse> FillChartDataAsync(ChartDataRequest chartDataRequest)
+    {
+      return PostAsync<ChartDataRequest, ChartDataResponse>(Constants.Trading.ChartData.IntradayChartPath, chartDataRequest);
+    }
     #endregion
   }
 }

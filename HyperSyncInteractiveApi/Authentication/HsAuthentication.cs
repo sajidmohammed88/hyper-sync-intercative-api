@@ -7,7 +7,7 @@ using HyperSyncInteractiveApi.Authentication.Models.Consent;
 using HyperSyncInteractiveApi.Authentication.Models.Login;
 using HyperSyncInteractiveApi.Authentication.Models.MpinLogin;
 using HyperSyncInteractiveApi.Authentication.Models.Token;
-using HyperSyncInteractiveApi.Common;
+using HyperSyncInteractiveApi.Common.Models;
 using HyperSyncInteractiveApi.Common.Utils;
 using System;
 using System.Net;

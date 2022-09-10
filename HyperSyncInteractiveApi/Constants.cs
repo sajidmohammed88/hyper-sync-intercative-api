@@ -58,6 +58,23 @@
         internal const string LoadRetentionTypesPath = "/quick/load/retention/types";
         internal const string LotsAndWeightsPath = _userBasePath + "get/lot-weight";
       }
+
+      internal static class PositionConversion
+      {
+        internal const string PostionConversionPath = "quick/convert/partialposition";
+
+      }
+
+      internal static class ScriptDetails
+      {
+        internal const string ScriptInfoPath = "quick/scrip/info";
+        internal const string IndexListPath = "quick/index/list";
+      }
+
+      internal static class Limits
+      {
+        internal const string LimitsPath = "quick/user/limits";
+      }
     }
   }
 }

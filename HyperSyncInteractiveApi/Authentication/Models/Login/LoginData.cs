@@ -1,4 +1,4 @@
-﻿using HyperSyncInteractiveApi.Common;
+﻿using HyperSyncInteractiveApi.Common.Models;
 
 namespace HyperSyncInteractiveApi.Authentication.Models.Login
 {

@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace HyperSyncInteractiveApi.Common
+namespace HyperSyncInteractiveApi.Common.Models
 {
   /// <summary>
   /// The base response of the API.

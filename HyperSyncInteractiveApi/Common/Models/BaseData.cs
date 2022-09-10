@@ -1,4 +1,4 @@
-﻿namespace HyperSyncInteractiveApi.Common
+﻿namespace HyperSyncInteractiveApi.Common.Models
 {
   public class BaseData
   {

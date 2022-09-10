@@ -1,7 +1,10 @@
 ﻿using HyperSyncInteractiveApi.Trading.Abstractions;
 using HyperSyncInteractiveApi.Trading.Models.Book;
 using HyperSyncInteractiveApi.Trading.Models.Holdings;
+using HyperSyncInteractiveApi.Trading.Models.Limits;
 using HyperSyncInteractiveApi.Trading.Models.Order;
+using HyperSyncInteractiveApi.Trading.Models.PositionConversion;
+using HyperSyncInteractiveApi.Trading.Models.ScriptDetails;
 using HyperSyncInteractiveApi.Trading.Models.User;
 using System.Threading.Tasks;
 
@@ -105,6 +108,35 @@ namespace HyperSyncInteractiveApi.Trading
     public Task<LotAndWeightResponse> GetLotsAndWeightsAsync()
     {
       return PostAsync<LotAndWeightResponse>(Constants.Trading.Order.LotsAndWeightsPath);
+    }
+
+    #endregion
+    #region Position conversion
+
+    public Task<PositionConversionResponse> PartialPositionConversionAsync(PositionConversionRequest positionConversionRequest)
+    {
+      return PostAsync<PositionConversionRequest, PositionConversionResponse>(Constants.Trading.PositionConversion.PostionConversionPath, positionConversionRequest);
+    }
+
+    #endregion
+    #region script details
+
+    public Task<ScriptInfoResponse> FillScriptInfoAsync(ScriptInfoRequest scriptInfoRequest)
+    {
+      return PostAsync<ScriptInfoRequest, ScriptInfoResponse>(Constants.Trading.ScriptDetails.ScriptInfoPath, scriptInfoRequest);
+    }
+
+    public Task<IndexListResponse> FillIndexListAsync(IndexListRequest indexListRequest)
+    {
+      return PostAsync<IndexListRequest, IndexListResponse>(Constants.Trading.ScriptDetails.IndexListPath, indexListRequest);
+    }
+
+    #endregion
+    #region limits
+
+    public Task<RmsLimitsResponse> FillRmsLimitsAsync(RmsLimitsRequest rmsLimitsRequest)
+    {
+      return PostAsync<RmsLimitsRequest, RmsLimitsResponse>(Constants.Trading.Limits.LimitsPath, rmsLimitsRequest);
     }
 
     #endregion

@@ -2,7 +2,10 @@
 using HyperSyncInteractiveApi.Trading;
 using HyperSyncInteractiveApi.Trading.Models.Book;
 using HyperSyncInteractiveApi.Trading.Models.Holdings;
+using HyperSyncInteractiveApi.Trading.Models.Limits;
 using HyperSyncInteractiveApi.Trading.Models.Order;
+using HyperSyncInteractiveApi.Trading.Models.PositionConversion;
+using HyperSyncInteractiveApi.Trading.Models.ScriptDetails;
 using HyperSyncInteractiveApi.Trading.Models.User;
 using System.Diagnostics;
 using System.Linq;
@@ -72,6 +75,29 @@ namespace HyperSyncIntercativeApiEntry
 
       });
       LotAndWeightResponse lotAndWeightResponse = await hsInteractiveApi.GetLotsAndWeightsAsync();
+
+      // position conversion
+      PositionConversionResponse PositionConversionResponse = await hsInteractiveApi.PartialPositionConversionAsync(new PositionConversionRequest
+      {
+
+      });
+
+      // script details
+      ScriptInfoResponse scriptInfoResponse = await hsInteractiveApi.FillScriptInfoAsync(new ScriptInfoRequest
+      {
+
+      });
+
+      IndexListResponse indexListResponse = await hsInteractiveApi.FillIndexListAsync(new IndexListRequest
+      {
+
+      });
+
+      // Limits
+      RmsLimitsResponse rmsLimitsResponse = await hsInteractiveApi.FillRmsLimitsAsync(new RmsLimitsRequest
+      {
+
+      });
     }
   }
 }

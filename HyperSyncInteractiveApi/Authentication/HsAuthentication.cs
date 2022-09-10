@@ -32,39 +32,19 @@ namespace HyperSyncInteractiveApi.Authentication
     private IFlurlRequest BaseRequest => Constants.Authentication.BaseUrl.ConfigureRequest(ConfigureFlurlRequest);
 
     /// <inheritdoc />
-    public async Task<AuthorizationResponse> AuthorizeAsync(string clientId, string loginVerifier = null)
+    public Task<AuthorizationResponse> AuthorizeAsync(string clientId, string loginVerifier = null)
     {
       try
       {
-        AuthorizationResponse result = await BaseRequest
-           .AppendPathSegment(Constants.Authentication.AuthorizePath)
-           .WithHeader(Headers.AcceptHeaderKey, Headers.DefaultContentTypeHeaderValue)
-           .WithHeader(Headers.ContentTypeHeaderKey, Headers.DefaultContentTypeHeaderValue)
-           .AllowHttpStatus(HttpStatusCode.OK)
-           .PostJsonAsync(new LoginVerifierAuthorizationRequest
-           {
-             ClientId = clientId,
-             LoginVerifier = loginVerifier
-           })
-           .ReceiveJson<AuthorizationResponse>();
-
-        if (result.Code != HttpStatusCode.OK)
+        return PostAsync<LoginVerifierAuthorizationRequest, AuthorizationResponse>(Constants.Authentication.AuthorizePath, nameof(AuthorizeAsync), new LoginVerifierAuthorizationRequest
         {
-          ThrowException(result, nameof(AuthorizeAsync));
-        }
-
-        return result;
+          ClientId = clientId,
+          LoginVerifier = loginVerifier
+        });
       }
       catch (FlurlHttpException ex)
       {
-        ThrowException(new BaseResponse
-        {
-          Code = ex.StatusCode.HasValue ? (HttpStatusCode)ex.StatusCode : HttpStatusCode.InternalServerError,
-          Status = "FAILURE",
-          Message = ex.Message
-        },
-        nameof(AuthorizeAsync));
-
+        ThrowException(GenerateBaseRequest(ex), nameof(AuthorizeAsync));
         throw;
       }
     }
@@ -76,8 +56,6 @@ namespace HyperSyncInteractiveApi.Authentication
       {
         IFlurlResponse result = await BaseRequest
            .AppendPathSegment(Constants.Authentication.AuthorizePath)
-           .WithHeader(Headers.AcceptHeaderKey, Headers.DefaultContentTypeHeaderValue)
-           .WithHeader(Headers.ContentTypeHeaderKey, Headers.DefaultContentTypeHeaderValue)
            .PostJsonAsync(new ConsentVerifierAuthorizationRequest
            {
              ClientId = clientId,
@@ -93,120 +71,53 @@ namespace HyperSyncInteractiveApi.Authentication
       }
       catch (FlurlHttpException ex)
       {
-        ThrowException(new BaseResponse
-        {
-          Code = ex.StatusCode.HasValue ? (HttpStatusCode)ex.StatusCode : HttpStatusCode.InternalServerError,
-          Status = "FAILURE",
-          Message = ex.Message
-        },
-        nameof(GetAuthorizationCodeAsync));
-
+        ThrowException(GenerateBaseRequest(ex), nameof(GetAuthorizationCodeAsync));
         throw;
       }
     }
 
     /// <inheritdoc />
-    public async Task<LoginResponse> LoginAsync(LoginRequest loginRequest)
+    public Task<LoginResponse> LoginAsync(LoginRequest loginRequest)
     {
       try
       {
         loginRequest.Pwd = Helpers.ComputeHash(loginRequest.Pwd);
 
-        LoginResponse response = await BaseRequest
-          .AppendPathSegment(Constants.Authentication.LoginPath)
-          .WithHeader(Headers.AcceptHeaderKey, Headers.DefaultContentTypeHeaderValue)
-          .WithHeader(Headers.ContentTypeHeaderKey, Headers.DefaultContentTypeHeaderValue)
-          .AllowHttpStatus(HttpStatusCode.OK)
-          .PostJsonAsync(loginRequest)
-          .ReceiveJson<LoginResponse>();
-
-        if (response.Code != HttpStatusCode.OK)
-        {
-          ThrowException(response, nameof(LoginAsync));
-        }
-
-        return response;
+        return PostAsync<LoginRequest, LoginResponse>(Constants.Authentication.LoginPath, nameof(LoginAsync), loginRequest);
       }
       catch (FlurlHttpException ex)
       {
-        ThrowException(new BaseResponse
-        {
-          Code = ex.StatusCode.HasValue ? (HttpStatusCode)ex.StatusCode : HttpStatusCode.InternalServerError,
-          Status = "FAILURE",
-          Message = ex.Message
-        },
-        nameof(LoginAsync));
-
+        ThrowException(GenerateBaseRequest(ex), nameof(LoginAsync));
         throw;
       }
     }
 
     /// <inheritdoc />
-    public async Task<MpinLoginResponse> MpinLoginAsync(MpinLoginRequest mpinLoginRequest)
+    public Task<MpinLoginResponse> MpinLoginAsync(MpinLoginRequest mpinLoginRequest)
     {
       mpinLoginRequest.Mpin = Helpers.ComputeHash(mpinLoginRequest.Mpin);
 
       try
       {
-        MpinLoginResponse response = await BaseRequest
-          .AppendPathSegment(Constants.Authentication.MpinLoginPath)
-          .WithHeader(Headers.AcceptHeaderKey, Headers.DefaultContentTypeHeaderValue)
-          .WithHeader(Headers.ContentTypeHeaderKey, Headers.DefaultContentTypeHeaderValue)
-          .AllowHttpStatus(HttpStatusCode.OK)
-          .PostJsonAsync(mpinLoginRequest)
-          .ReceiveJson<MpinLoginResponse>();
-
-        if (response.Code != HttpStatusCode.OK)
-        {
-          ThrowException(response, nameof(MpinLoginAsync));
-        }
-
-        return response;
+        return PostAsync<MpinLoginRequest, MpinLoginResponse>(Constants.Authentication.MpinLoginPath, nameof(MpinLoginAsync), mpinLoginRequest);
       }
       catch (FlurlHttpException ex)
       {
-        ThrowException(new BaseResponse
-        {
-          Code = ex.StatusCode.HasValue ? (HttpStatusCode)ex.StatusCode : HttpStatusCode.InternalServerError,
-          Status = "FAILURE",
-          Message = ex.Message
-        },
-        nameof(MpinLoginAsync));
-
+        ThrowException(GenerateBaseRequest(ex), nameof(MpinLoginAsync));
         throw;
       }
     }
 
     /// <inheritdoc />
-    public async Task<ConsentResponse> ConsentAsync(ConsentRequest consentRequest)
+    public Task<ConsentResponse> ConsentAsync(ConsentRequest consentRequest)
     {
       try
       {
-        ConsentResponse response = await BaseRequest
-          .AppendPathSegment(Constants.Authentication.ConsentPath)
-          .WithHeader(Headers.AcceptHeaderKey, Headers.DefaultContentTypeHeaderValue)
-          .WithHeader(Headers.ContentTypeHeaderKey, Headers.DefaultContentTypeHeaderValue)
-          .AllowHttpStatus(HttpStatusCode.OK)
-          .PostJsonAsync(consentRequest)
-          .ReceiveJson<ConsentResponse>();
-
-        if (response.Code != HttpStatusCode.OK)
-        {
-          ThrowException(response, nameof(ConsentAsync));
-        }
-
-        return response;
+        return PostAsync<ConsentRequest, ConsentResponse>(Constants.Authentication.ConsentPath, nameof(ConsentAsync), consentRequest);
       }
       catch (FlurlHttpException ex)
       {
-        ThrowException(new BaseResponse
-        {
-          Code = ex.StatusCode.HasValue ? (HttpStatusCode)ex.StatusCode : HttpStatusCode.InternalServerError,
-          Status = "FAILURE",
-          Message = ex.Message
-        },
-        nameof(ConsentAsync));
-
+        ThrowException(GenerateBaseRequest(ex), nameof(ConsentAsync));
         throw;
       }
     }
@@ -237,19 +148,36 @@ namespace HyperSyncInteractiveApi.Authentication
       }
       catch (FlurlHttpException ex)
       {
-        ThrowException(new BaseResponse
-        {
-          Code = ex.StatusCode.HasValue ? (HttpStatusCode)ex.StatusCode : HttpStatusCode.InternalServerError,
-          Status = "FAILURE",
-          Message = ex.Message
-        },
-        nameof(GenerateTokenAsync));
-
+        ThrowException(GenerateBaseRequest(ex), nameof(GenerateTokenAsync));
         throw;
       }
     }
 
-    private static AuthenticationException ThrowException(BaseResponse response, string methodeName) =>
-    throw new AuthenticationException($"Error during calling the methode : {nameof(AuthorizeAsync)}, with Code : {response.Code} Status : {response.Status} Message : {response.Message}");
+    private async Task<TResponse> PostAsync<TRequest, TResponse>(string path, string methodName, TRequest request) where TResponse : BaseResponse
+    {
+      TResponse response = await BaseRequest
+        .AppendPathSegment(path)
+        .PostJsonAsync(request)
+        .ReceiveJson<TResponse>();
+
+      if (response.Code != HttpStatusCode.OK)
+      {
+        ThrowException(response, methodName);
+      }
+
+      return response;
+    }
+
+    private static AuthenticationException ThrowException(BaseResponse response, string methodeName)
+    {
+      throw new AuthenticationException($"Error during calling the methode : {methodeName}, with Code : {response.Code} Status : {response.Status} Message : {response.Message}");
+    }
+
+    private static BaseResponse GenerateBaseRequest(FlurlHttpException flurlHttpException) => new BaseResponse
+    {
+      Code = flurlHttpException.StatusCode.HasValue ? (HttpStatusCode)flurlHttpException.StatusCode : HttpStatusCode.InternalServerError,
+      Status = "FAILURE",
+      Message = flurlHttpException.Message
+    };
   }
 }

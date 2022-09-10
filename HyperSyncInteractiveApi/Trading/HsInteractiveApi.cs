@@ -1,71 +1,110 @@
-﻿using Flurl.Http;
-using Flurl.Http.Configuration;
-using HyperSyncInteractiveApi.Common.Utils;
-using HyperSyncInteractiveApi.Trading.Abstractions;
+﻿using HyperSyncInteractiveApi.Trading.Abstractions;
+using HyperSyncInteractiveApi.Trading.Models.Book;
+using HyperSyncInteractiveApi.Trading.Models.Holdings;
+using HyperSyncInteractiveApi.Trading.Models.Order;
 using HyperSyncInteractiveApi.Trading.Models.User;
-using System;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace HyperSyncInteractiveApi.Trading
 {
-  public class HsInteractiveApi : IHsInteractiveApi
+  public class HsInteractiveApi : HsInteractiveApiBase, IHsInteractiveApi
   {
-    private readonly ISerializer _jsonSerializer;
-    private readonly string _token;
-
-    public HsInteractiveApi(string token)
+    public HsInteractiveApi(string token) : base(token, Constants.Trading.BaseUrl)
     {
-      _jsonSerializer = new FlurlJsonSerializer();
-      _token = token;
     }
-
-    private Action<FlurlHttpSettings> ConfigureFlurlRequest => s =>
-    {
-      s.JsonSerializer = _jsonSerializer;
-    };
-
-    private IFlurlRequest BaseRequest => Constants.Trading.BaseUrl.ConfigureRequest(ConfigureFlurlRequest);
 
     #region USER
 
-    public async Task<UserDetails> GetDefaultLoginAsync()
+    public Task<UserDetails> GetDefaultLoginAsync()
     {
-      var x = await BaseRequest
-           .AppendPathSegment(Constants.Trading.User.DefaultLoginPath)
-           .WithHeader(Headers.AcceptHeaderKey, Headers.DefaultContentTypeHeaderValue)
-           .WithHeader(Headers.TokenHeaderKey, _token)
-           .AllowHttpStatus(HttpStatusCode.OK)
-           .PostAsync().ReceiveString();
-      return await BaseRequest
-           .AppendPathSegment(Constants.Trading.User.DefaultLoginPath)
-           .WithHeader(Headers.AcceptHeaderKey, Headers.DefaultContentTypeHeaderValue)
-           .WithHeader(Headers.TokenHeaderKey, _token)
-           .AllowHttpStatus(HttpStatusCode.OK)
-           .PostAsync()
-           .ReceiveJson<UserDetails>();
+      return PostAsync<UserDetails>(Constants.Trading.User.DefaultLoginPath);
     }
 
-    public async Task<AccountDetails> GetUserDetailsAsync()
+    public Task<AccountDetails> GetUserDetailsAsync()
     {
-      return await BaseRequest
-           .AppendPathSegment(Constants.Trading.User.UserDetailsPath)
-           .WithHeader(Headers.AcceptHeaderKey, Headers.DefaultContentTypeHeaderValue)
-           .WithHeader(Headers.TokenHeaderKey, _token)
-           .AllowHttpStatus(HttpStatusCode.OK)
-           .PostAsync()
-           .ReceiveJson<AccountDetails>();
+      return PostAsync<AccountDetails>(Constants.Trading.User.UserDetailsPath);
     }
 
-    public async Task<ResetUserResponse> ResetUserAsync()
+    public Task<ResetUserResponse> ResetUserAsync()
     {
-      return await BaseRequest
-           .AppendPathSegment(Constants.Trading.User.ResetUserPath)
-           .WithHeader(Headers.AcceptHeaderKey, Headers.DefaultContentTypeHeaderValue)
-           .WithHeader(Headers.TokenHeaderKey, _token)
-           .AllowHttpStatus(HttpStatusCode.OK)
-           .PostAsync()
-           .ReceiveJson<ResetUserResponse>();
+      return PostAsync<ResetUserResponse>(Constants.Trading.User.ResetUserPath);
+    }
+
+    #endregion
+    #region Book
+
+    public Task<OrderBookResponse> GetOrderBookAsync()
+    {
+      return PostAsync<OrderBookResponse>(Constants.Trading.Book.OrderBookPath);
+    }
+
+    public Task<OrderHistoryResponse> GetOrderHistoryAsync(OrderHistoryRequest orderHistoryRequest)
+    {
+      return PostAsync<OrderHistoryRequest, OrderHistoryResponse>(Constants.Trading.Book.OrderHistoryPath, orderHistoryRequest);
+    }
+
+    public Task<TradeBookResponse> GetTradeBookAsync()
+    {
+      return PostAsync<TradeBookResponse>(Constants.Trading.Book.TradeBookPath);
+    }
+
+    public Task<PositionBookResponse> GetPositionBookAsync()
+    {
+      return PostAsync<PositionBookResponse>(Constants.Trading.Book.PositionBookPath);
+    }
+
+    #endregion
+    #region Holdings
+    public Task<HoldingResponse> GetHoldingsAsync(HoldingRequest holdingRequest)
+    {
+      return PostAsync<HoldingRequest, HoldingResponse>(Constants.Trading.Holding.HoldingsPath, holdingRequest);
+    }
+    #endregion
+    #region Order
+
+    public Task<PlaceOrderResponse> PlaceOrderAsync(PlaceOrderRequest placeOrderRequest)
+    {
+      return PostAsync<PlaceOrderRequest, PlaceOrderResponse>(Constants.Trading.Order.PlaceOrderPath, placeOrderRequest);
+    }
+
+    public Task<PlaceOrderResponse> VrPlaceOrderAsync(VrPlaceOrderRequest vrPlaceOrderRequest)
+    {
+      return PostAsync<VrPlaceOrderRequest, PlaceOrderResponse>(Constants.Trading.Order.VrPlaceOrderPath, vrPlaceOrderRequest);
+    }
+
+    public Task<PlaceOrderResponse> ModifyOrderAsync(ModifyOrderRequest modifyOrderRequest)
+    {
+      return PostAsync<ModifyOrderRequest, PlaceOrderResponse>(Constants.Trading.Order.ModifyOrderPath, modifyOrderRequest);
+    }
+
+    public Task<PlaceOrderResponse> VrModifyOrderAsync(VrModifyOrderRequest vrModifyOrderRequest)
+    {
+      return PostAsync<VrModifyOrderRequest, PlaceOrderResponse>(Constants.Trading.Order.VrModifyOrderPath, vrModifyOrderRequest);
+    }
+
+    public Task<OrderBaseResponse> CancelOrderAsync(CancelOrderRequest cancelOrderRequest)
+    {
+      return PostAsync<CancelOrderRequest, OrderBaseResponse>(Constants.Trading.Order.CancelOrderPath, cancelOrderRequest);
+    }
+
+    public Task<OrderBaseResponse> ExitCoverOrderAsync(ExistCoverOrderRequest existCoverOrderRequest)
+    {
+      return PostAsync<ExistCoverOrderRequest, OrderBaseResponse>(Constants.Trading.Order.ExistCoverOrderPath, existCoverOrderRequest);
+    }
+
+    public Task<CoverOrderRangeResponse> FillCoverOrderRangeAsync(CoverOrderRangeRequest coverOrderRangeRequest)
+    {
+      return PostAsync<CoverOrderRangeRequest, CoverOrderRangeResponse>(Constants.Trading.Order.CoverOrderRangePath, coverOrderRangeRequest);
+    }
+
+    public Task<RetentionTypesResponse> LoadRetentionTypesAsync(RetentionTypesRequest retentionTypesRequest)
+    {
+      return PostAsync<RetentionTypesRequest, RetentionTypesResponse>(Constants.Trading.Order.LoadRetentionTypesPath, retentionTypesRequest);
+    }
+
+    public Task<LotAndWeightResponse> GetLotsAndWeightsAsync()
+    {
+      return PostAsync<LotAndWeightResponse>(Constants.Trading.Order.LotsAndWeightsPath);
     }
 
     #endregion

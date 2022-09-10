@@ -19,16 +19,44 @@
       internal const string ResponseType = "code";
       internal const string GrantType = "authorization_code";
     }
+
     internal static class Trading
     {
-      internal const string BaseUrl = "https://uathsint.hypertrade.in/";
+      internal const string BaseUrl = "https://uathsint.hypertrade.in";
+      private const string _userBasePath = "quick/user/";
+      private const string _orderBasePath = "quick/order/";
 
       internal static class User
       {
-        private const string _userBasePath = "quick/user/";
         internal const string UserDetailsPath = _userBasePath + "details";
         internal const string ResetUserPath = _userBasePath + "reset";
         internal const string DefaultLoginPath = _userBasePath + "login/default";
+      }
+
+      internal static class Book
+      {
+        internal const string OrderBookPath = _userBasePath + "orders";
+        internal const string OrderHistoryPath = _orderBasePath + "history";
+        internal const string TradeBookPath = _userBasePath + "trades";
+        internal const string PositionBookPath = _userBasePath + "positions";
+      }
+
+      internal static class Holding
+      {
+        internal const string HoldingsPath = _userBasePath + "holdings";
+      }
+
+      internal static class Order
+      {
+        internal const string PlaceOrderPath = _orderBasePath + "place";
+        internal const string VrPlaceOrderPath = _orderBasePath + "vr/place";
+        internal const string ModifyOrderPath = _orderBasePath + "modify";
+        internal const string VrModifyOrderPath = _orderBasePath + "vr/modify";
+        internal const string CancelOrderPath = _orderBasePath + "cancel";
+        internal const string ExistCoverOrderPath = _orderBasePath + "co/exit";
+        internal const string CoverOrderRangePath = _orderBasePath + "co/range";
+        internal const string LoadRetentionTypesPath = "/quick/load/retention/types";
+        internal const string LotsAndWeightsPath = _userBasePath + "get/lot-weight";
       }
     }
   }

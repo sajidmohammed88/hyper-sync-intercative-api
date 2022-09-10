@@ -12,9 +12,10 @@ namespace HyperSyncInteractiveApi.Authentication
   public class BearerTokenService : IBearerTokenService
   {
     private readonly IHsAuthentication _hsAuthentication;
-    public BearerTokenService()
+
+    public BearerTokenService(IHsAuthentication hsAuthentication)
     {
-      _hsAuthentication = new HsAuthentication();
+      _hsAuthentication = hsAuthentication;
     }
 
     /// <inheritdoc />

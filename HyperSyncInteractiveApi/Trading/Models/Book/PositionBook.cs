@@ -2,6 +2,7 @@
 {
   public class PositionBook : PositionBookBase
   {
+    public string BrdLtQty { get; set; }
     public string BuyAmt { get; set; }
     public string CfSellAmt { get; set; }
     public string SqrFlg { get; set; }

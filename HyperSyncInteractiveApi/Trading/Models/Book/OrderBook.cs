@@ -2,6 +2,7 @@
 {
   public class OrderBook : BaseOrderBook
   {
+    public string BrdLtQty { get; set; }
     public string ExOrdId { get; set; }
     public int DscQty { get; set; }
     public string BrkClnt { get; set; }
@@ -20,8 +21,8 @@
     public string OrdEntTm { get; set; }
     public string ReqId { get; set; }
     public string Vldt { get; set; }
-    public int RefLmtPrc { get; set; }
-    public int CoPct { get; set; }
+    public decimal RefLmtPrc { get; set; }
+    public decimal CoPct { get; set; }
     public string OrdAutSt { get; set; }
     public string MktProPct { get; set; }
     public int BoeSec { get; set; }

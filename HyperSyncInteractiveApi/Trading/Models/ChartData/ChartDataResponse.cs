@@ -1,8 +1,9 @@
-﻿namespace HyperSyncInteractiveApi.Trading.Models.ChartData
+﻿using HyperSyncInteractiveApi.Common.Models;
+
+namespace HyperSyncInteractiveApi.Trading.Models.ChartData
 {
-  public class ChartDataResponse
+  public class ChartDataResponse : ResponseState
   {
-    public string Stat { get; set; }
     public string ExSeg { get; set; }
     public string TrdSym { get; set; }
     public ChartDatas Data { get; set; }

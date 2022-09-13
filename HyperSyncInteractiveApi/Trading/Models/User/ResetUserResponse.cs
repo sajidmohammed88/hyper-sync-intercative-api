@@ -1,8 +1,9 @@
-﻿namespace HyperSyncInteractiveApi.Trading.Models.User
+﻿using HyperSyncInteractiveApi.Common.Models;
+
+namespace HyperSyncInteractiveApi.Trading.Models.User
 {
-  public class ResetUserResponse
+  public class ResetUserResponse : ResponseState
   {
-    public string Stat { get; set; }
     public string Check { get; set; }
   }
 }

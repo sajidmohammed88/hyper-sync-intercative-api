@@ -39,8 +39,12 @@ namespace HyperSyncInteractiveApi.Trading.Abstractions
     {
       return await BaseRequest
            .AppendPathSegment(path)
+           .WithHeader(Headers.ContentTypeHeaderKey, Headers.UrlEncodedContentTypeHeaderValue)
            .WithHeader(Headers.TokenHeaderKey, _token)
-           .PostJsonAsync(request)
+           .PostUrlEncodedAsync(new
+           {
+             jData = _jsonSerializer.Serialize(request)
+           })
            .ReceiveJson<TResponse>();
     }
   }

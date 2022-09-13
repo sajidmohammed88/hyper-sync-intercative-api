@@ -1,8 +1,9 @@
-﻿namespace HyperSyncInteractiveApi.Trading.Models.Message
+﻿using HyperSyncInteractiveApi.Common.Models;
+
+namespace HyperSyncInteractiveApi.Trading.Models.Message
 {
-  public class ExchangeMessageResponse
+  public class ExchangeMessageResponse : ResponseState
   {
-    public string Stat { get; set; }
     public string ExchMsg { get; set; }
   }
 }

@@ -2,6 +2,7 @@
 {
   public class OrderHistory : BaseOrderBook
   {
+    public int BrdLtQty { get; set; }
     public string CstFrm { get; set; }
     public string NReqId { get; set; }
     public string DclQty { get; set; }

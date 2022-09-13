@@ -5,6 +5,7 @@ namespace HyperSyncInteractiveApi.Trading.Models.PositionConversion
   public class PositionConversionResponse
   {
     public string Stat { get; set; }
+    public string ErrMsg { get; set; }
     public string Posflag { get; set; }
 
     [JsonPropertyName("Result")]

@@ -8,5 +8,4 @@
     public string Tp { get; set; }
     public string Ts { get; set; }
   }
-
 }

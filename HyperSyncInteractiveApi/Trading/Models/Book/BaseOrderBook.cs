@@ -1,4 +1,6 @@
-﻿namespace HyperSyncInteractiveApi.Trading.Models.Book
+﻿using System.Text.Json.Serialization;
+
+namespace HyperSyncInteractiveApi.Trading.Models.Book
 {
   public class BaseOrderBook : TradeBookBase
   {
@@ -13,6 +15,8 @@
     public int UnFldSz { get; set; }
     public string RejRsn { get; set; }
     public string MktPro { get; set; }
+
+    [JsonPropertyName("GuiOrdId")]
     public string GuiOrdId { get; set; }
   }
 }

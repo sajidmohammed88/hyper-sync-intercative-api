@@ -2,6 +2,7 @@
 {
   public class TradeBook : TradeBookBase
   {
+    public string BrdLtQty { get; set; }
     public string ExOrdId { get; set; }
     public string BrkClnt { get; set; }
     public string CstFrm { get; set; }

@@ -10,7 +10,6 @@
     public string Sym { get; set; }
     public string ExpDt { get; set; }
     public string Series { get; set; }
-    public int BrdLtQty { get; set; }
     public string OptTp { get; set; }
     public string GenNum { get; set; }
     public string GenDen { get; set; }

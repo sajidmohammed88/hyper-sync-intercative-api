@@ -6,5 +6,6 @@ namespace HyperSyncInteractiveApi.Common.Models
   {
     public string Stat { get; set; }
     public HttpStatusCode StCode { get; set; }
+    public string ErrMsg { get; set; }
   }
 }

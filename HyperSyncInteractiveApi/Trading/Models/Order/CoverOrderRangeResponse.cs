@@ -3,6 +3,6 @@
   public class CoverOrderRangeResponse
   {
     public string Stat { get; set; }
-    public string Pct { get; set; }
+    public int Pct { get; set; }
   }
 }

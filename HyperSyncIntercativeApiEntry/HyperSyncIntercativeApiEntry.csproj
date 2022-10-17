@@ -64,7 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HyperSyncInteractiveApi\HyperSyncInteractiveApi.csproj">
-      <Project>{f3c7b326-a1ed-4ead-b3d1-e70485812b39}</Project>
+      <Project>{0050b3d3-aca3-4900-900b-54fa48a5310f}</Project>
       <Name>HyperSyncInteractiveApi</Name>
     </ProjectReference>
   </ItemGroup>

@@ -28,24 +28,52 @@ namespace HyperSyncInteractiveApi.Trading.Abstractions
 
     protected async Task<T> PostAsync<T>(string path)
     {
-      return await BaseRequest
-           .AppendPathSegment(path)
-           .WithHeader(Headers.TokenHeaderKey, _token)
-           .PostAsync()
-           .ReceiveJson<T>();
+      try
+      {
+        string result = await BaseRequest
+               .AppendPathSegment(path)
+               .WithHeader(Headers.TokenHeaderKey, _token)
+               .PostAsync()
+               .ReceiveString();
+
+        // log the result as string here
+
+        return _jsonSerializer.Deserialize<T>(result);
+      }
+      catch (FlurlHttpException ex)
+      {
+        string message = $"Call failed with message : {ex.Message} and response : {await ex.GetResponseStringAsync()}";
+        //Log the message here
+
+        throw;
+      }
     }
 
     protected async Task<TResponse> PostAsync<TRequest, TResponse>(string path, TRequest request)
     {
-      return await BaseRequest
-           .AppendPathSegment(path)
-           .WithHeader(Headers.ContentTypeHeaderKey, Headers.UrlEncodedContentTypeHeaderValue)
-           .WithHeader(Headers.TokenHeaderKey, _token)
-           .PostUrlEncodedAsync(new
-           {
-             jData = _jsonSerializer.Serialize(request)
-           })
-           .ReceiveJson<TResponse>();
+      try
+      {
+        string result = await BaseRequest
+               .AppendPathSegment(path)
+               .WithHeader(Headers.ContentTypeHeaderKey, Headers.UrlEncodedContentTypeHeaderValue)
+               .WithHeader(Headers.TokenHeaderKey, _token)
+               .PostUrlEncodedAsync(new
+               {
+                 jData = _jsonSerializer.Serialize(request)
+               })
+               .ReceiveString();
+
+        // log result as string here
+
+        return _jsonSerializer.Deserialize<TResponse>(result);
+      }
+      catch (FlurlHttpException ex)
+      {
+        string message = $"Call failed with message : {ex.Message} and response : {await ex.GetResponseStringAsync()}";
+        //Log the message here
+
+        throw;
+      }
     }
   }
 }

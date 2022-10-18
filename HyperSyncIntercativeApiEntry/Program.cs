@@ -49,7 +49,7 @@ namespace HyperSyncIntercativeApiEntry
       PlaceOrderResponse placeOrderResponse = await hsInteractiveApi.PlaceOrderAsync(new PlaceOrderRequest
       {
         Am = "NO",
-        Es = "nse_cm",
+        Es = "nse_cm1",
         Pc = "CNC",
         Pr = "118.45",
         Ot = "L",

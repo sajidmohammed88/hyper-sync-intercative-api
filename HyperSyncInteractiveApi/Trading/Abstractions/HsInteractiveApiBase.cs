@@ -2,6 +2,7 @@
 using Flurl.Http.Configuration;
 using HyperSyncInteractiveApi.Common.Utils;
 using System;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace HyperSyncInteractiveApi.Trading.Abstractions
@@ -57,6 +58,7 @@ namespace HyperSyncInteractiveApi.Trading.Abstractions
                .AppendPathSegment(path)
                .WithHeader(Headers.ContentTypeHeaderKey, Headers.UrlEncodedContentTypeHeaderValue)
                .WithHeader(Headers.TokenHeaderKey, _token)
+               .AllowAnyHttpStatus()
                .PostUrlEncodedAsync(new
                {
                  jData = _jsonSerializer.Serialize(request)
